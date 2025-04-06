@@ -4,7 +4,7 @@ This repository contains my coursework, assignments, and projects completed duri
 
 ## 📂 Structure
 
-The repository is organized by subject and semester for easy navigation.
+The repository is organized by subject for easy navigation.
 
 ## 🚨 Disclaimer
 
