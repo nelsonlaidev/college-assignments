@@ -1,0 +1,76 @@
+body {
+  /* Body text */
+  color: red;
+  font-family: "Comic Sans MS", Cursive, Arial, Verdana, sans-serif;
+  /* Background */
+  background-image: url("greenwhite_paper.gif");
+}
+
+/* Top banner */
+h1 {
+  background-image: url("pastelblossom.jpg");
+  color: yellow;
+  height: 4em;
+}
+
+/* Header */
+h1,
+h2 {
+  text-align: center;
+}
+
+h3 {
+  font-weight: bold;
+}
+
+/* List */
+ul {
+  list-style-type: none;
+  background: none;
+  padding: 0.2em;
+  margin: 0.1em;
+}
+
+/* List items */
+li {
+  color: maroon;
+  font-style: italic;
+  font-weight: bold;
+  margin-left: 25px;
+  padding: 2px;
+}
+
+/* Color for boxes surrounding lists */
+/* Grooving of boxes */
+.box-1 {
+  border: thick groove red;
+  border-radius: 25px;
+}
+
+.box-2 {
+  border: thick groove blue;
+  border-radius: 25px;
+}
+
+.box-3 {
+  border: thick groove orange;
+  border-radius: 25px;
+}
+
+/* Paragraph */
+p {
+  color: navy;
+  font-size: 1.2em;
+}
+
+/* Dynamic effect of hyperlink */
+a {
+  color: maroon;
+  text-decoration: none;
+}
+
+a:hover {
+  background-color: black;
+  color: white;
+  text-decoration: underline;
+}

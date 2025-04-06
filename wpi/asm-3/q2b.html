@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Question 2B</title>
+  </head>
+  <body>
+    How much is <input id="factor1" type="text" /> multiplies <input id="factor2" type="text" />
+    <form>
+      Enter your answer here <br />
+      <input id="answer" type="text" />
+      <input onclick="answerQuestion()" type="button" value="My Answer" />
+      <input type="reset" value="Clear" />
+      <input onclick="newQuestion()" type="button" value="New Question" />
+    </form>
+
+    <script>
+      let num1;
+      let num2;
+      let factor1 = document.getElementById("factor1");
+      let factor2 = document.getElementById("factor2");
+      let answerInput = document.getElementById("answer");
+      let correctAnsRes = ["Very good!", "Excellent!", "Nice work!", "Keep up the nice work!"];
+      let incorrectAnsRes = ["No, Please try again.", "Wrong. Try once more.", "Don't give up!", "No. Keep trying!"];
+
+      function newQuestion() {
+        num1 = Math.floor(Math.random() * 10);
+        num2 = Math.floor(Math.random() * 10);
+
+        factor1.value = num1;
+        factor2.value = num2;
+      }
+
+      newQuestion();
+
+      function answerQuestion() {
+        let ans = Number(answerInput.value);
+        let randomNum = Math.floor(Math.random() * 4);
+
+        if (ans === num1 * num2) {
+          alert(correctAnsRes[randomNum]);
+        } else {
+          alert(incorrectAnsRes[randomNum]);
+        }
+      }
+    </script>
+  </body>
+</html>

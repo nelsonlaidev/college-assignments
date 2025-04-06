@@ -1,0 +1,15 @@
+{
+  "java.settings.url": ".vscode/settings.prefs",
+  "cSpell.enabled": true,
+  "cSpell.words": [
+    "ctxt",
+    "enduml",
+    "Ooops",
+    "prefs",
+    "startuml",
+    "tszhong",
+    "Woohoo"
+  ],
+  "editor.formatOnSave": false,
+  "editor.formatOnPaste": false
+}

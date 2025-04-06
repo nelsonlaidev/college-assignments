@@ -1,0 +1,127 @@
+@startuml
+' Define the GameState enum
+enum GameState {
+  SMALL
+  BIG
+  FIRE
+  INVINCIBLE
+}
+
+' --------------------
+' Character and its subclasses
+' --------------------
+class Character {
+  - String name
+  - GameState state
+  - int coins
+  - String message
+  - int lives
+  - GameState previousState
+  - int invincibleRounds
+  - static final GameState INITIAL_STATE
+  - static final int INITIAL_COINS
+  - static final int INITIAL_LIVES
+  - static final int INITIAL_INVINCIBLE_ROUNDS
+  + Character(String name, String message)
+  + getName(): String
+  + getState(): GameState
+  + getCoins(): int
+  + getMessage(): String
+  + getLives(): int
+  + getPreviousState(): GameState
+  + getInvincibilityRounds(): int
+  + setState(GameState state)
+  + setInvincibilityRounds(int rounds)
+  + resetInvincibilityRounds()
+  + collectCoin()
+  + collectPowerUp()
+  + hitEnemy()
+  + gainLife()
+  + jump()
+  + run()
+}
+
+class Mario {
+  + Mario()
+}
+
+class Luigi {
+  + Luigi()
+}
+
+class Peach {
+  + Peach()
+  + floatInAir()
+}
+
+class Toad {
+  + Toad()
+  + revealHiddenItem()
+}
+
+Character <|-- Mario
+Character <|-- Luigi
+Character <|-- Peach
+Character <|-- Toad
+
+' --------------------
+' TestClient class
+' --------------------
+class TestClient {
+  - Scanner scanner
+  - Character player
+  - int round
+  + TestClient()
+  - getCharacter(): Character
+  - printState()
+  - start()
+  + main(String[] args)
+}
+
+' --------------------
+' PowerUpItem and its subclasses
+' --------------------
+abstract class PowerUpItem {
+  - String name
+  - String dialogue
+  # Character character
+  + PowerUpItem(String name, String dialogue, Character character)
+  + getName(): String
+  + getDialogue(): String
+  + applyEffect() : void
+}
+
+class OneUpMushroom {
+  + OneUpMushroom(Character character)
+  + applyEffect()
+}
+
+class SuperMushroom {
+  + SuperMushroom(Character character)
+  + applyEffect()
+}
+
+class Flower {
+  + Flower(Character character)
+  + applyEffect()
+}
+
+class Star {
+  + Star(Character character)
+  + applyEffect()
+}
+
+PowerUpItem <|-- OneUpMushroom
+PowerUpItem <|-- SuperMushroom
+PowerUpItem <|-- Flower
+PowerUpItem <|-- Star
+
+' --------------------
+' Associations
+' --------------------
+' TestClient uses Scanner and Character.
+TestClient ..> Scanner : uses
+
+' PowerUpItem has a reference to Character.
+PowerUpItem --> Character
+@enduml

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Question 1</title>
+  </head>
+  <body>
+    <script>
+      function average(num) {
+        let sum = 0;
+
+        for (let i = 0; i <= num; i++) {
+          sum += i;
+        }
+        
+        return sum / (num + 1);
+      }
+
+      let number;
+
+      while (true) {
+        number = Number(prompt("Enter a number between 0 and 100:"));
+
+        if (isNaN(number)) {
+          alert("Invalid input. Please enter a number.");
+          continue;
+        }
+
+        if (number < 0 || number > 100) {
+          alert("The number is out of the specified range. Please enter a number between 0 and 100.");
+          continue;
+        }
+
+        break;
+      }
+
+      const averageNumber = average(number);
+      alert("The average number from 0 up to your input is " + averageNumber);
+    </script>
+  </body>
+</html>
