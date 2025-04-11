@@ -5,11 +5,21 @@ public class TestClient {
   private Character player;
   private int round;
 
+  /**
+   * - Initializes the scanner for user input
+   * - Sets the starting round value to 1.
+   */
   public TestClient() {
     this.scanner = new Scanner(System.in);
     this.round = 1;
   }
 
+  /**
+   * Prompts the user to choose a character (Mario, Luigi, Peach, or Toad)
+   * and returns the appropriate Character instance based on user selection.
+   *
+   * @return A Character instance based on user selection.
+   */
   private Character getCharacter() {
     Character choice;
     int input;
@@ -55,10 +65,18 @@ public class TestClient {
     return choice;
   }
 
+  /**
+   * Prints the player's current lives, coins, and state to the console.
+   */
   private void printState() {
     System.out.printf("LIVES: %s COINS: %s STATUS: %s%n", player.getLives(), player.getCoins(), player.getState());
   }
 
+  /**
+   * Contains the main game loop. It processes user actions (collect coin,
+   * collect power-up, hit enemy), updates the round number, manages
+   * invincibility rounds, and ends the game when lives reach 0 or the user exits.
+   */
   private void start() {
     player = getCharacter();
     System.out.println("******************************");
@@ -114,6 +132,12 @@ public class TestClient {
     }
   }
 
+  /**
+   * The entry point of the application. Creates an instance of TestClient
+   * and calls the start() method to run the game loop.
+   *
+   * @param args Command-line arguments (not used).
+   */
   public static void main(String[] args) {
     TestClient testClient = new TestClient();
     testClient.start();

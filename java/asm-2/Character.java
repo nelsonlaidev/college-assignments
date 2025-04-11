@@ -23,6 +23,13 @@ public class Character {
   // +1 for the star power-up
   private static final int INITIAL_INVINCIBLE_ROUNDS = 3 + 1;
 
+  /**
+   * Initializes a new character with the given name and message,
+   * and other default values.
+   *
+   * @param name    The name of the character.
+   * @param message The message associated with the character.
+   */
   public Character(String name, String message) {
     this.name = name;
     this.message = message;
@@ -35,58 +42,115 @@ public class Character {
   }
 
   // Getters
+  /**
+   * Returns the character's name.
+   *
+   * @return The name of the character.
+   */
   public String getName() {
     return this.name;
   }
 
+  /**
+   * Returns the current game state of the character.
+   *
+   * @return The current GameState.
+   */
   public GameState getState() {
     return this.state;
   }
 
+  /**
+   * Returns the current number of coins collected by the character.
+   *
+   * @return The number of coins.
+   */
   public int getCoins() {
     return this.coins;
   }
 
+  /**
+   * Returns the message associated with the character.
+   *
+   * @return The character's message string.
+   */
   public String getMessage() {
     return this.message;
   }
 
+  /**
+   * Returns the current number of lives the character has.
+   *
+   * @return The number of lives.
+   */
   public int getLives() {
     return this.lives;
   }
 
+  /**
+   * Returns the character's state before becoming invincible.
+   * Used to revert state after invincibility wears off.
+   *
+   * @return The previous GameState.
+   */
   public GameState getPreviousState() {
     return this.previousState;
   }
 
+  /**
+   * Returns the remaining number of rounds the character is invincible.
+   *
+   * @return The number of remaining invincible rounds.
+   */
   public int getInvincibilityRounds() {
     return this.invincibleRounds;
   }
 
   // Setters
+  /**
+   * Sets the character's current game state.
+   *
+   * @param state The new GameState value.
+   */
   public void setState(GameState state) {
     this.state = state;
   }
 
+  /**
+   * Sets the number of remaining invincibility rounds.
+   *
+   * @param invincibleRounds The number of rounds to set.
+   */
   public void setInvincibilityRounds(int invincibleRounds) {
     this.invincibleRounds = invincibleRounds;
   }
 
+  /**
+   * Resets the number of invincibility rounds to its initial value.
+   */
   public void resetInvincibilityRounds() {
     this.invincibleRounds = INITIAL_INVINCIBLE_ROUNDS;
   }
 
   // Methods
+  /**
+   * Increments the coin count. If the coin count reaches a multiple of 5,
+   * grants an extra life and resets the coin count to 0.
+   */
   public void collectCoin() {
     coins += 1;
-    // Collecting 5 coins grants an extra life to the game character.
-    // Then reset the coins to 0.
+
     if (coins % 5 == 0) {
       lives += 1;
       coins = 0;
     }
   }
 
+  /**
+   * Randomly selects a power-up item (OneUpMushroom, SuperMushroom, Flower, Star),
+   * prints its name and dialogue, and applies its effect to the character.
+   * Saves the previous state if a Star is collected.
+   */
   public void collectPowerUp() {
     PowerUpItem powerUpItem = null;
 
@@ -108,9 +172,7 @@ public class Character {
         break;
 
       case 3:
-        // Save the previous state before creating the Star power-up
         this.previousState = this.state;
-        // Reset the invincible rounds to the initial value
         this.invincibleRounds = INITIAL_INVINCIBLE_ROUNDS;
         powerUpItem = new Star(this);
         break;
@@ -124,6 +186,12 @@ public class Character {
     }
   }
 
+  /**
+   * Processes the consequences of the character being hit by an enemy.
+   * - If SMALL, loses a life.
+   * - If BIG or FIRE, reverts to SMALL state.
+   * - If INVINCIBLE, takes no damage.
+   */
   public void hitEnemy() {
     System.out.println("Oh enemy!");
 
@@ -153,19 +221,23 @@ public class Character {
     }
   }
 
+  // Increments the character's lives count by one.
   public void gainLife() {
     lives += 1;
   }
 
   // Other unused methods
+  // Simulates the character jumping.
   public void jump() {
     System.out.println("Jump!");
   }
 
+  // Simulates the character running.
   public void run() {
     System.out.println("Run!");
   }
 
+  // Simulates the character moving.
   public void move() {
     System.out.println("Move!");
   }
@@ -188,6 +260,7 @@ class Peach extends Character {
     super("Peach", "Please be careful!");
   }
 
+  // Simulates Peach floating in the air.
   public void floatInAir() {
     System.out.println("I'm floating in the air!");
   }
@@ -198,6 +271,7 @@ class Toad extends Character {
     super("Toad", "Yay!");
   }
 
+  // Simulates Toad revealing a hidden item.
   public void revealHiddenItem() {
     System.out.println("I'm revealing a hidden item!");
   }
