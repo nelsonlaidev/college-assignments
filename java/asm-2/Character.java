@@ -251,7 +251,7 @@ class Mario extends Character {
 
 class Luigi extends Character {
   public Luigi() {
-    super("Luigi", "I'm-a Luigi");
+    super("Luigi", "I'm-a Luigi!");
   }
 }
 
