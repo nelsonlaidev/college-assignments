@@ -10,6 +10,9 @@ public class TypingGame {
       "A", "S", "D", "F", "G", "H", "J", "K", "L", ";",
       "Z", "X", "C", "V", "B", "N", "M", ",", ".", "/"
   };
+  private static final String[] WORDS = {
+      "<Last_Name>", "COMPUTER", "PROGRAMMING", "CAT", "OBJECT", "COLLEGE", "CLASS", "TEXT", "COMMUNITY", "AI"
+  };
 
   private JLabel createInfoLabel(String text) {
     JLabel label = new JLabel(text, SwingConstants.CENTER);
@@ -35,6 +38,10 @@ public class TypingGame {
   private JPanel createMainPanel() {
     JPanel mainPanel = new JPanel(new BorderLayout());
     mainPanel.setBackground(new Color(255, 255, 255));
+
+    JLabel wordLabel = new JLabel(WORDS[0], SwingConstants.CENTER);
+    wordLabel.setFont(new Font("Arial", Font.BOLD, 48));
+    mainPanel.add(wordLabel, BorderLayout.CENTER);
 
     return mainPanel;
   }
