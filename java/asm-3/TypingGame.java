@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Arrays;
 
 public class TypingGame implements KeyListener {
   private JLabel roundLabel;
@@ -63,7 +64,8 @@ public class TypingGame implements KeyListener {
   }
 
   public TypingGame() {
-    currentWord = WORDS[0];
+    int randomIndex = (int) (Math.random() * WORDS.length);
+    currentWord = WORDS[randomIndex];
     counter = 0;
 
     // Timer
@@ -95,17 +97,21 @@ public class TypingGame implements KeyListener {
 
   @Override
   public void keyTyped(KeyEvent e) {
-    System.out.println("Key Typed: " + e.getKeyChar());
+    // Nothing to do here
   }
 
   @Override
   public void keyReleased(KeyEvent e) {
-    System.out.println("Key Released: " + e.getKeyChar());
+    // Nothing to do here
   }
 
   @Override
   public void keyPressed(KeyEvent e) {
-    System.out.println("Key Pressed: " + e.getKeyChar());
+    char input = Character.toUpperCase(e.getKeyChar());
+
+    if (Arrays.asList(KEYBOARD_KEYS).contains(String.valueOf(input))) {
+      System.out.println("Key pressed: " + input);
+    }
   }
 
   public static void main(String[] args) {
