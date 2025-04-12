@@ -110,6 +110,11 @@ public class TypingGame implements KeyListener {
 
   public static void main(String[] args) {
     // A safe way to put the GUI on the EDT
-    SwingUtilities.invokeLater(TypingGame::new);
+    SwingUtilities.invokeLater(new Runnable() {
+      @Override
+      public void run() {
+        new TypingGame();
+      }
+    });
   }
 }
