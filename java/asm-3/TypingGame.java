@@ -50,7 +50,7 @@ public class TypingGame {
     JPanel keyboardPanel = createKeyboardPanel();
 
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    frame.setSize(800, 500);
+    frame.setSize(640, 400);
     frame.setVisible(true);
 
     frame.add(infoPanel, BorderLayout.NORTH);
