@@ -1,7 +1,8 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
 
-public class TypingGame {
+public class TypingGame implements KeyListener {
   private JLabel roundLabel;
   private JLabel mistakeLabel;
   private JLabel timeLabel;
@@ -66,11 +67,29 @@ public class TypingGame {
 
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     frame.setSize(640, 400);
+    frame.addKeyListener(this);
+    frame.setFocusable(true);
+    frame.requestFocusInWindow();
     frame.setVisible(true);
 
     frame.add(infoPanel, BorderLayout.NORTH);
     frame.add(mainPanel, BorderLayout.CENTER);
     frame.add(keyboardPanel, BorderLayout.SOUTH);
+  }
+
+  @Override
+  public void keyTyped(KeyEvent e) {
+    System.out.println("Key Typed: " + e.getKeyChar());
+  }
+
+  @Override
+  public void keyReleased(KeyEvent e) {
+    System.out.println("Key Released: " + e.getKeyChar());
+  }
+
+  @Override
+  public void keyPressed(KeyEvent e) {
+    System.out.println("Key Pressed: " + e.getKeyChar());
   }
 
   public static void main(String[] args) {
