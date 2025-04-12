@@ -7,6 +7,7 @@ public class TypingGame implements KeyListener {
   private JLabel mistakeLabel;
   private JLabel timeLabel;
   private String currentWord;
+  private int counter;
 
   private static final String[] KEYBOARD_KEYS = {
       "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P",
@@ -63,6 +64,18 @@ public class TypingGame implements KeyListener {
 
   public TypingGame() {
     currentWord = WORDS[0];
+    counter = 0;
+
+    // Timer
+    Timer timer = new Timer(1000, new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        counter++;
+        timeLabel.setText("Time: " + counter + "s");
+      }
+    });
+    timer.start();
+
     JFrame frame = new JFrame("Typing Game");
     JPanel infoPanel = createInfoPanel();
     JPanel mainPanel = createMainPanel();
