@@ -32,6 +32,13 @@ public class TypingGame {
     return infoPanel;
   }
 
+  private JPanel createMainPanel() {
+    JPanel mainPanel = new JPanel(new BorderLayout());
+    mainPanel.setBackground(new Color(255, 255, 255));
+
+    return mainPanel;
+  }
+
   private JPanel createKeyboardPanel() {
     JPanel keyboardPanel = new JPanel(new GridLayout(3, 10));
 
@@ -47,6 +54,7 @@ public class TypingGame {
   public TypingGame() {
     JFrame frame = new JFrame("Typing Game");
     JPanel infoPanel = createInfoPanel();
+    JPanel mainPanel = createMainPanel();
     JPanel keyboardPanel = createKeyboardPanel();
 
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -54,6 +62,7 @@ public class TypingGame {
     frame.setVisible(true);
 
     frame.add(infoPanel, BorderLayout.NORTH);
+    frame.add(mainPanel, BorderLayout.CENTER);
     frame.add(keyboardPanel, BorderLayout.SOUTH);
   }
 
