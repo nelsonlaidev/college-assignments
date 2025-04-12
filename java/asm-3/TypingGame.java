@@ -5,6 +5,11 @@ public class TypingGame {
   private JLabel roundLabel;
   private JLabel mistakeLabel;
   private JLabel timeLabel;
+  private static final String[] KEYBOARD_KEYS = {
+      "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P",
+      "A", "S", "D", "F", "G", "H", "J", "K", "L", ";",
+      "Z", "X", "C", "V", "B", "N", "M", ",", ".", "/"
+  };
 
   private JLabel createInfoLabel(String text) {
     JLabel label = new JLabel(text, SwingConstants.CENTER);
@@ -27,15 +32,29 @@ public class TypingGame {
     return infoPanel;
   }
 
+  private JPanel createKeyboardPanel() {
+    JPanel keyboardPanel = new JPanel(new GridLayout(3, 10));
+
+    for (String key : KEYBOARD_KEYS) {
+      JButton button = new JButton(key);
+      button.setFont(new Font("Arial", Font.PLAIN, 24));
+      keyboardPanel.add(button);
+    }
+
+    return keyboardPanel;
+  }
+
   public TypingGame() {
     JFrame frame = new JFrame("Typing Game");
     JPanel infoPanel = createInfoPanel();
+    JPanel keyboardPanel = createKeyboardPanel();
 
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     frame.setSize(800, 500);
     frame.setVisible(true);
 
     frame.add(infoPanel, BorderLayout.NORTH);
+    frame.add(keyboardPanel, BorderLayout.SOUTH);
   }
 
   public static void main(String[] args) {
