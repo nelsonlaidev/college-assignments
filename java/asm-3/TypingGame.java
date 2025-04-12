@@ -6,6 +6,8 @@ public class TypingGame implements KeyListener {
   private JLabel roundLabel;
   private JLabel mistakeLabel;
   private JLabel timeLabel;
+  private String currentWord;
+
   private static final String[] KEYBOARD_KEYS = {
       "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P",
       "A", "S", "D", "F", "G", "H", "J", "K", "L", ";",
@@ -40,7 +42,7 @@ public class TypingGame implements KeyListener {
     JPanel mainPanel = new JPanel(new BorderLayout());
     mainPanel.setBackground(new Color(255, 255, 255));
 
-    JLabel wordLabel = new JLabel(WORDS[0], SwingConstants.CENTER);
+    JLabel wordLabel = new JLabel(currentWord, SwingConstants.CENTER);
     wordLabel.setFont(new Font("Arial", Font.BOLD, 48));
     mainPanel.add(wordLabel, BorderLayout.CENTER);
 
@@ -60,6 +62,7 @@ public class TypingGame implements KeyListener {
   }
 
   public TypingGame() {
+    currentWord = WORDS[0];
     JFrame frame = new JFrame("Typing Game");
     JPanel infoPanel = createInfoPanel();
     JPanel mainPanel = createMainPanel();
