@@ -1,6 +1,4 @@
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
-
 import java.awt.*;
 
 public class TypingGame {
@@ -10,13 +8,12 @@ public class TypingGame {
 
   private JLabel createInfoLabel(String text) {
     JLabel label = new JLabel(text, SwingConstants.CENTER);
-    label.setFont(new Font("Arial", Font.BOLD, 16));
+    label.setFont(new Font("Arial", Font.PLAIN, 20));
     return label;
   }
 
   private JPanel createInfoPanel() {
     JPanel infoPanel = new JPanel(new GridLayout(1, 3, 10, 0));
-    infoPanel.setBorder(new EmptyBorder(10, 10, 0, 10));
     infoPanel.setBackground(new Color(238, 238, 238));
 
     roundLabel = createInfoLabel("Round: 0");
