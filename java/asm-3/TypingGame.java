@@ -136,9 +136,11 @@ public class TypingGame implements KeyListener {
   @Override
   public void keyPressed(KeyEvent e) {
     char input = Character.toUpperCase(e.getKeyChar());
+    char currentChar = Character.toUpperCase(currentWord.charAt(0));
+
     if (currentWord.length() > 0) {
 
-      if (input == currentWord.charAt(0)) {
+      if (input == currentChar) {
         currentWord = currentWord.substring(1);
         wordLabel.setText(currentWord);
 
