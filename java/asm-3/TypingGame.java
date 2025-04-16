@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Arrays;
 
 public class TypingGame implements KeyListener {
   private JLabel roundLabel;
@@ -144,33 +145,31 @@ public class TypingGame implements KeyListener {
 
   @Override
   public void keyPressed(KeyEvent e) {
-    if (isGameOver) {
-      return;
-    }
     char input = Character.toUpperCase(e.getKeyChar());
     char currentChar = Character.toUpperCase(currentWord.charAt(0));
 
-    if (currentWord.length() > 0) {
-
-      if (input == currentChar) {
-        currentWord = currentWord.substring(1);
-        wordLabel.setText(currentWord);
-        mainPanel.setBackground(DEFAULT_MAIN_PANEL_COLOR);
-
-        if (currentWord.isEmpty()) {
-          if (roundCount < MAX_ROUNDS) {
-            newRound();
-          } else {
-            endGame();
-          }
-        }
-      } else {
-        mistakeCount++;
-        mistakeLabel.setText("Mistake: " + mistakeCount);
-        mainPanel.setBackground(WRONG_MAIN_PANEL_COLOR);
-      }
+    // If the game is over or the input is not a valid key, return
+    if (isGameOver || !Arrays.asList(KEYBOARD_KEYS).contains(String.valueOf(input)) || currentWord.length() == 0) {
+      return;
     }
 
+    if (input == currentChar) {
+      currentWord = currentWord.substring(1);
+      wordLabel.setText(currentWord);
+      mainPanel.setBackground(DEFAULT_MAIN_PANEL_COLOR);
+
+      if (currentWord.isEmpty()) {
+        if (roundCount < MAX_ROUNDS) {
+          newRound();
+        } else {
+          endGame();
+        }
+      }
+    } else {
+      mistakeCount++;
+      mistakeLabel.setText("Mistake: " + mistakeCount);
+      mainPanel.setBackground(WRONG_MAIN_PANEL_COLOR);
+    }
   }
 
   public static void main(String[] args) {
