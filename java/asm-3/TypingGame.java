@@ -86,6 +86,14 @@ public class TypingGame implements KeyListener {
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     frame.setSize(640, 400);
     frame.addKeyListener(this);
+
+    frame.addWindowListener(new WindowAdapter() {
+      @Override
+      public void windowActivated(WindowEvent e) {
+        frame.requestFocusInWindow();
+      }
+    });
+
     frame.setFocusable(true);
     frame.requestFocusInWindow();
     frame.setVisible(true);
