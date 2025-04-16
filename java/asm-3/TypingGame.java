@@ -7,14 +7,19 @@ public class TypingGame implements KeyListener {
   private JLabel mistakeLabel;
   private JLabel timeLabel;
   private JLabel wordLabel;
+  private JPanel mainPanel;
   private String currentWord;
+
   private int counter;
   private int mistakeCount;
   private int roundCount;
   private Timer timer;
   private JFrame frame;
   private boolean isGameOver;
+
   private static final int MAX_ROUNDS = 5;
+  private static final Color DEFAULT_MAIN_PANEL_COLOR = new Color(255, 255, 255);
+  private static final Color WRONG_MAIN_PANEL_COLOR = new Color(255, 0, 0);
 
   private static final String[] KEYBOARD_KEYS = {
       "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P",
@@ -72,7 +77,7 @@ public class TypingGame implements KeyListener {
   public TypingGame() {
     frame = new JFrame("Typing Game");
     JPanel infoPanel = createInfoPanel();
-    JPanel mainPanel = createMainPanel();
+    mainPanel = createMainPanel();
     JPanel keyboardPanel = createKeyboardPanel();
 
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -150,6 +155,7 @@ public class TypingGame implements KeyListener {
       if (input == currentChar) {
         currentWord = currentWord.substring(1);
         wordLabel.setText(currentWord);
+        mainPanel.setBackground(DEFAULT_MAIN_PANEL_COLOR);
 
         if (currentWord.isEmpty()) {
           if (roundCount < MAX_ROUNDS) {
@@ -161,6 +167,7 @@ public class TypingGame implements KeyListener {
       } else {
         mistakeCount++;
         mistakeLabel.setText("Mistake: " + mistakeCount);
+        mainPanel.setBackground(WRONG_MAIN_PANEL_COLOR);
       }
     }
 
