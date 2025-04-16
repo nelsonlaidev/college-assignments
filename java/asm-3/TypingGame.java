@@ -68,20 +68,6 @@ public class TypingGame implements KeyListener {
   }
 
   public TypingGame() {
-    int randomIndex = (int) (Math.random() * WORDS.length);
-    currentWord = WORDS[randomIndex];
-    counter = 0;
-
-    // Timer
-    timer = new Timer(1000, new ActionListener() {
-      @Override
-      public void actionPerformed(ActionEvent e) {
-        counter++;
-        timeLabel.setText("Time: " + counter + "s");
-      }
-    });
-    timer.start();
-
     frame = new JFrame("Typing Game");
     JPanel infoPanel = createInfoPanel();
     JPanel mainPanel = createMainPanel();
@@ -105,21 +91,28 @@ public class TypingGame implements KeyListener {
     frame.add(infoPanel, BorderLayout.NORTH);
     frame.add(mainPanel, BorderLayout.CENTER);
     frame.add(keyboardPanel, BorderLayout.SOUTH);
+
+    newRound();
+
+    // Timer
+    timer = new Timer(1000, new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        counter++;
+        timeLabel.setText("Time: " + counter + "s");
+      }
+    });
+    timer.start();
   }
 
-  private void resetGame() {
-    counter = 0;
-    mistakeCount = 0;
+  private void newRound() {
     roundCount++;
     roundLabel.setText("Round: " + roundCount);
-    mistakeLabel.setText("Mistake: 0");
-    timeLabel.setText("Time: 0s");
 
     int randomIndex = (int) (Math.random() * WORDS.length);
     currentWord = WORDS[randomIndex];
     wordLabel.setText(currentWord);
 
-    timer.restart();
     frame.requestFocusInWindow();
   }
 
@@ -145,7 +138,7 @@ public class TypingGame implements KeyListener {
         wordLabel.setText(currentWord);
 
         if (currentWord.isEmpty()) {
-          resetGame();
+          newRound();
         }
       } else {
         mistakeCount++;
