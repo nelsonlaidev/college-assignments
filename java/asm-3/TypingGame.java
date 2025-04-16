@@ -1,14 +1,18 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.Arrays;
 
 public class TypingGame implements KeyListener {
   private JLabel roundLabel;
   private JLabel mistakeLabel;
   private JLabel timeLabel;
+  private JLabel wordLabel;
   private String currentWord;
   private int counter;
+  private int mistakeCount;
+  private int roundCount;
+  private Timer timer;
+  private JFrame frame;
 
   private static final String[] KEYBOARD_KEYS = {
       "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P",
@@ -44,7 +48,7 @@ public class TypingGame implements KeyListener {
     JPanel mainPanel = new JPanel(new BorderLayout());
     mainPanel.setBackground(new Color(255, 255, 255));
 
-    JLabel wordLabel = new JLabel(currentWord, SwingConstants.CENTER);
+    wordLabel = new JLabel(currentWord, SwingConstants.CENTER);
     wordLabel.setFont(new Font("Arial", Font.BOLD, 48));
     mainPanel.add(wordLabel, BorderLayout.CENTER);
 
@@ -69,7 +73,7 @@ public class TypingGame implements KeyListener {
     counter = 0;
 
     // Timer
-    Timer timer = new Timer(1000, new ActionListener() {
+    timer = new Timer(1000, new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
         counter++;
@@ -78,7 +82,7 @@ public class TypingGame implements KeyListener {
     });
     timer.start();
 
-    JFrame frame = new JFrame("Typing Game");
+    frame = new JFrame("Typing Game");
     JPanel infoPanel = createInfoPanel();
     JPanel mainPanel = createMainPanel();
     JPanel keyboardPanel = createKeyboardPanel();
@@ -103,6 +107,22 @@ public class TypingGame implements KeyListener {
     frame.add(keyboardPanel, BorderLayout.SOUTH);
   }
 
+  private void resetGame() {
+    counter = 0;
+    mistakeCount = 0;
+    roundCount++;
+    roundLabel.setText("Round: " + roundCount);
+    mistakeLabel.setText("Mistake: 0");
+    timeLabel.setText("Time: 0s");
+
+    int randomIndex = (int) (Math.random() * WORDS.length);
+    currentWord = WORDS[randomIndex];
+    wordLabel.setText(currentWord);
+
+    timer.restart();
+    frame.requestFocusInWindow();
+  }
+
   @Override
   public void keyTyped(KeyEvent e) {
     // Nothing to do here
@@ -116,10 +136,21 @@ public class TypingGame implements KeyListener {
   @Override
   public void keyPressed(KeyEvent e) {
     char input = Character.toUpperCase(e.getKeyChar());
+    if (currentWord.length() > 0) {
 
-    if (Arrays.asList(KEYBOARD_KEYS).contains(String.valueOf(input))) {
-      System.out.println("Key pressed: " + input);
+      if (input == currentWord.charAt(0)) {
+        currentWord = currentWord.substring(1);
+        wordLabel.setText(currentWord);
+
+        if (currentWord.isEmpty()) {
+          resetGame();
+        }
+      } else {
+        mistakeCount++;
+        mistakeLabel.setText("Mistake: " + mistakeCount);
+      }
     }
+
   }
 
   public static void main(String[] args) {
