@@ -20,7 +20,7 @@ public class TypingGame implements KeyListener {
       "Z", "X", "C", "V", "B", "N", "M", ",", ".", "/"
   };
   private static final String[] WORDS = {
-      "<Last_Name>", "COMPUTER", "PROGRAMMING", "CAT", "OBJECT", "COLLEGE", "CLASS", "TEXT", "COMMUNITY", "AI"
+      "Lai", "COMPUTER", "PROGRAMMING", "CAT", "OBJECT", "COLLEGE", "CLASS", "TEXT", "COMMUNITY", "AI"
   };
 
   private JLabel createInfoLabel(String text) {
