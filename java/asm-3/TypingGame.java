@@ -13,6 +13,8 @@ public class TypingGame implements KeyListener {
   private int roundCount;
   private Timer timer;
   private JFrame frame;
+  private boolean isGameOver;
+  private static final int MAX_ROUNDS = 5;
 
   private static final String[] KEYBOARD_KEYS = {
       "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P",
@@ -20,7 +22,7 @@ public class TypingGame implements KeyListener {
       "Z", "X", "C", "V", "B", "N", "M", ",", ".", "/"
   };
   private static final String[] WORDS = {
-      "Lai", "COMPUTER", "PROGRAMMING", "CAT", "OBJECT", "COLLEGE", "CLASS", "TEXT", "COMMUNITY", "AI"
+      "LAI", "COMPUTER", "PROGRAMMING", "CAT", "OBJECT", "COLLEGE", "CLASS", "TEXT", "COMMUNITY", "AI"
   };
 
   private JLabel createInfoLabel(String text) {
@@ -116,6 +118,15 @@ public class TypingGame implements KeyListener {
     frame.requestFocusInWindow();
   }
 
+  private void endGame() {
+    isGameOver = true;
+    timer.stop();
+    // Use HTML to create a new line
+    wordLabel
+        .setText("<html><div style='text-align: center;font-size: 16px;'>Game End!<br>Time used: " + counter + " second"
+            + (counter > 1 ? "s" : "") + "</div></html>");
+  }
+
   @Override
   public void keyTyped(KeyEvent e) {
     // Nothing to do here
@@ -128,6 +139,9 @@ public class TypingGame implements KeyListener {
 
   @Override
   public void keyPressed(KeyEvent e) {
+    if (isGameOver) {
+      return;
+    }
     char input = Character.toUpperCase(e.getKeyChar());
     char currentChar = Character.toUpperCase(currentWord.charAt(0));
 
@@ -138,7 +152,11 @@ public class TypingGame implements KeyListener {
         wordLabel.setText(currentWord);
 
         if (currentWord.isEmpty()) {
-          newRound();
+          if (roundCount < MAX_ROUNDS) {
+            newRound();
+          } else {
+            endGame();
+          }
         }
       } else {
         mistakeCount++;
