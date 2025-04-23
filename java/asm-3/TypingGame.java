@@ -108,10 +108,14 @@ public class TypingGame implements KeyListener {
       @Override
       public void actionPerformed(ActionEvent e) {
         counter++;
-        timeLabel.setText("Time: " + counter + "s");
+        setTimeLabel(counter);
       }
     });
     timer.start();
+  }
+
+  private void setTimeLabel(int time) {
+    timeLabel.setText("Time: " + time + "s");
   }
 
   private void newRound() {
@@ -170,6 +174,9 @@ public class TypingGame implements KeyListener {
     } else {
       mistakeCount++;
       mistakeLabel.setText("Mistake: " + mistakeCount);
+      // Penalty for wrong input
+      counter += 5;
+      setTimeLabel(counter);
       mainPanel.setBackground(WRONG_MAIN_PANEL_COLOR);
       currentWord = originalWord;
       wordLabel.setText(currentWord);
