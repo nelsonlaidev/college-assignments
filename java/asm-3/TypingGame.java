@@ -20,8 +20,8 @@ public class TypingGame implements KeyListener {
   private boolean isGameOver;
 
   private static final int MAX_ROUNDS = 5;
-  private static final Color DEFAULT_MAIN_PANEL_COLOR = new Color(255, 255, 255);
-  private static final Color WRONG_MAIN_PANEL_COLOR = new Color(255, 0, 0);
+  private static final Color DEFAULT_MAIN_PANEL_COLOR = Color.WHITE;
+  private static final Color WRONG_MAIN_PANEL_COLOR = Color.RED;
 
   private static final String[] KEYBOARD_KEYS = {
       "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P",
@@ -55,7 +55,7 @@ public class TypingGame implements KeyListener {
 
   private JPanel createMainPanel() {
     JPanel mainPanel = new JPanel(new BorderLayout());
-    mainPanel.setBackground(new Color(255, 255, 255));
+    mainPanel.setBackground(Color.WHITE);
 
     wordLabel = new JLabel(currentWord, SwingConstants.CENTER);
     wordLabel.setFont(new Font("Arial", Font.BOLD, 48));
