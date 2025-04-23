@@ -8,7 +8,6 @@ public class TypingGame implements KeyListener {
   private JLabel mistakeLabel;
   private JLabel timeLabel;
   private JLabel wordLabel;
-  private JPanel mainPanel;
   private String currentWord;
   private String originalWord;
 
@@ -55,10 +54,11 @@ public class TypingGame implements KeyListener {
 
   private JPanel createMainPanel() {
     JPanel mainPanel = new JPanel(new BorderLayout());
-    mainPanel.setBackground(Color.WHITE);
 
     wordLabel = new JLabel(currentWord, SwingConstants.CENTER);
     wordLabel.setFont(new Font("Arial", Font.BOLD, 48));
+    wordLabel.setOpaque(true);
+    wordLabel.setBackground(DEFAULT_MAIN_PANEL_COLOR);
     mainPanel.add(wordLabel, BorderLayout.CENTER);
 
     return mainPanel;
@@ -79,7 +79,7 @@ public class TypingGame implements KeyListener {
   public TypingGame() {
     frame = new JFrame("Typing Game");
     JPanel infoPanel = createInfoPanel();
-    mainPanel = createMainPanel();
+    JPanel mainPanel = createMainPanel();
     JPanel keyboardPanel = createKeyboardPanel();
 
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -162,7 +162,7 @@ public class TypingGame implements KeyListener {
     if (input == currentChar) {
       currentWord = currentWord.substring(1);
       wordLabel.setText(currentWord);
-      mainPanel.setBackground(DEFAULT_MAIN_PANEL_COLOR);
+      wordLabel.setBackground(DEFAULT_MAIN_PANEL_COLOR);
 
       if (currentWord.isEmpty()) {
         if (roundCount < MAX_ROUNDS) {
@@ -177,7 +177,7 @@ public class TypingGame implements KeyListener {
       // Penalty for wrong input
       counter += 5;
       setTimeLabel(counter);
-      mainPanel.setBackground(WRONG_MAIN_PANEL_COLOR);
+      wordLabel.setBackground(WRONG_MAIN_PANEL_COLOR);
       currentWord = originalWord;
       wordLabel.setText(currentWord);
     }
