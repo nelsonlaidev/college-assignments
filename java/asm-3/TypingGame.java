@@ -10,6 +10,7 @@ public class TypingGame implements KeyListener {
   private JLabel wordLabel;
   private JPanel mainPanel;
   private String currentWord;
+  private String originalWord;
 
   private int counter;
   private int mistakeCount;
@@ -118,7 +119,8 @@ public class TypingGame implements KeyListener {
     roundLabel.setText("Round: " + roundCount);
 
     int randomIndex = (int) (Math.random() * WORDS.length);
-    currentWord = WORDS[randomIndex];
+    originalWord = WORDS[randomIndex];
+    currentWord = originalWord;
     wordLabel.setText(currentWord);
 
     frame.requestFocusInWindow();
@@ -169,6 +171,8 @@ public class TypingGame implements KeyListener {
       mistakeCount++;
       mistakeLabel.setText("Mistake: " + mistakeCount);
       mainPanel.setBackground(WRONG_MAIN_PANEL_COLOR);
+      currentWord = originalWord;
+      wordLabel.setText(currentWord);
     }
   }
 
