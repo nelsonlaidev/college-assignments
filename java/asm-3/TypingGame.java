@@ -2,6 +2,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class TypingGame implements KeyListener {
   private JLabel roundLabel;
@@ -17,10 +19,15 @@ public class TypingGame implements KeyListener {
   private Timer timer;
   private JFrame frame;
   private boolean isGameOver;
+  private Map<String, JButton> keyButtons = new HashMap<>();
 
   private static final int MAX_ROUNDS = 5;
   private static final Color DEFAULT_MAIN_PANEL_COLOR = Color.WHITE;
   private static final Color WRONG_MAIN_PANEL_COLOR = Color.RED;
+
+  private static final Color CORRECT_KEY_COLOR = Color.GREEN;
+  private static final Color INCORRECT_KEY_COLOR = Color.RED;
+  private static final Color DEFAULT_KEY_COLOR = Color.BLACK;
 
   private static final String[] KEYBOARD_KEYS = {
       "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P",
@@ -71,6 +78,7 @@ public class TypingGame implements KeyListener {
       JButton button = new JButton(key);
       button.setFont(new Font("Arial", Font.PLAIN, 24));
       keyboardPanel.add(button);
+      keyButtons.put(key, button);
     }
 
     return keyboardPanel;
@@ -160,6 +168,15 @@ public class TypingGame implements KeyListener {
     }
 
     if (input == currentChar) {
+      for (JButton button : keyButtons.values()) {
+        button.setForeground(DEFAULT_KEY_COLOR);
+      }
+
+      JButton correctButton = keyButtons.get(String.valueOf(input));
+      if (correctButton != null) {
+        correctButton.setForeground(CORRECT_KEY_COLOR);
+      }
+
       currentWord = currentWord.substring(1);
       wordLabel.setText(currentWord);
       wordLabel.setBackground(DEFAULT_MAIN_PANEL_COLOR);
@@ -178,6 +195,12 @@ public class TypingGame implements KeyListener {
       counter += 5;
       setTimeLabel(counter);
       wordLabel.setBackground(WRONG_MAIN_PANEL_COLOR);
+
+      JButton wrongButton = keyButtons.get(String.valueOf(input));
+      if (wrongButton != null) {
+        wrongButton.setForeground(INCORRECT_KEY_COLOR);
+      }
+
       currentWord = originalWord;
       wordLabel.setText(currentWord);
     }
