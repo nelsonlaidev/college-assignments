@@ -134,6 +134,7 @@ public class TypingGame implements KeyListener {
     originalWord = WORDS[randomIndex];
     currentWord = originalWord;
     wordLabel.setText(currentWord);
+    wordLabel.setBackground(DEFAULT_MAIN_PANEL_COLOR);
 
     frame.requestFocusInWindow();
   }
@@ -154,7 +155,12 @@ public class TypingGame implements KeyListener {
 
   @Override
   public void keyReleased(KeyEvent e) {
-    // Nothing to do here
+    char released = Character.toUpperCase(e.getKeyChar());
+    String keyStr = String.valueOf(released);
+    JButton releasedButton = keyButtons.get(keyStr);
+    if (releasedButton != null) {
+      releasedButton.setForeground(DEFAULT_KEY_COLOR);
+    }
   }
 
   @Override
@@ -168,10 +174,6 @@ public class TypingGame implements KeyListener {
     }
 
     if (input == currentChar) {
-      for (JButton button : keyButtons.values()) {
-        button.setForeground(DEFAULT_KEY_COLOR);
-      }
-
       JButton correctButton = keyButtons.get(String.valueOf(input));
       if (correctButton != null) {
         correctButton.setForeground(CORRECT_KEY_COLOR);
