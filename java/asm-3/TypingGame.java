@@ -76,12 +76,26 @@ public class TypingGame implements KeyListener {
     timer.start();
   }
 
+  /**
+   * Creates a JLabel with the specified text, centered horizontally,
+   * and styled with Arial font, plain, size 20.
+   *
+   * @param text The text to display on the label.
+   * @return A styled JLabel instance.
+   */
   private JLabel createInfoLabel(String text) {
     JLabel label = new JLabel(text, SwingConstants.CENTER);
     label.setFont(new Font("Arial", Font.PLAIN, 20));
     return label;
   }
 
+  /**
+   * Creates the information panel containing round, mistake, and time labels.
+   * The panel uses a GridLayout with 1 row and 3 columns and a light gray
+   * background.
+   *
+   * @return JPanel containing the info labels.
+   */
   private JPanel createInfoPanel() {
     JPanel infoPanel = new JPanel(new GridLayout(1, 3, 10, 0));
     infoPanel.setBackground(new Color(238, 238, 238));
@@ -97,6 +111,13 @@ public class TypingGame implements KeyListener {
     return infoPanel;
   }
 
+  /**
+   * Creates the main panel that displays the current word to type.
+   * The word is shown in a large bold Arial font, centered horizontally,
+   * with a background color that changes based on correctness.
+   *
+   * @return JPanel containing the word label.
+   */
   private JPanel createMainPanel() {
     JPanel mainPanel = new JPanel(new BorderLayout());
 
@@ -109,6 +130,13 @@ public class TypingGame implements KeyListener {
     return mainPanel;
   }
 
+  /**
+   * Creates the keyboard panel with buttons representing keys Q to /.
+   * Each button is styled with Arial font size 24.
+   * Mouse listeners simulate key press and release events for each button.
+   *
+   * @return JPanel containing the keyboard buttons.
+   */
   private JPanel createKeyboardPanel() {
     JPanel keyboardPanel = new JPanel(new GridLayout(3, 10));
 
@@ -135,6 +163,12 @@ public class TypingGame implements KeyListener {
     return keyboardPanel;
   }
 
+  /**
+   * Handles the visual update when a key is released.
+   * Resets the foreground color of the corresponding key button to default.
+   *
+   * @param released The character of the key released.
+   */
   private void handleKeyReleased(char released) {
     String keyStr = String.valueOf(released);
     JButton releasedButton = keyButtons.get(keyStr);
@@ -143,6 +177,16 @@ public class TypingGame implements KeyListener {
     }
   }
 
+  /**
+   * Handles the logic when a key is pressed.
+   * Checks if the pressed key matches the first character of the current word.
+   * If correct, updates the word display and color, and proceeds to next round or
+   * ends game.
+   * If incorrect, increments mistake count, applies time penalty, changes colors,
+   * and resets the word.
+   *
+   * @param input The character of the key pressed.
+   */
   private void handleKeyPressed(char input) {
     char currentChar = Character.toUpperCase(currentWord.charAt(0));
 
@@ -186,10 +230,21 @@ public class TypingGame implements KeyListener {
     }
   }
 
+  /**
+   * Updates the time label to display the elapsed time in seconds.
+   *
+   * @param time The elapsed time in seconds.
+   */
   private void setTimeLabel(int time) {
     timeLabel.setText("Time: " + time + "s");
   }
 
+  /**
+   * Starts a new round by incrementing the round count,
+   * selecting a random word from the WORDS array,
+   * resetting the current word and updating the display.
+   * Also requests focus for the game window.
+   */
   private void newRound() {
     roundCount++;
     roundLabel.setText("Round: " + roundCount);
@@ -203,6 +258,12 @@ public class TypingGame implements KeyListener {
     frame.requestFocusInWindow();
   }
 
+  /**
+   * Ends the game by stopping the timer,
+   * setting the game over flag,
+   * and updating the word label to show the final time used.
+   * The message is formatted with HTML for multi-line display.
+   */
   private void endGame() {
     isGameOver = true;
     timer.stop();
@@ -212,23 +273,48 @@ public class TypingGame implements KeyListener {
             + (counter > 1 ? "s" : "") + "</div></html>");
   }
 
+  /**
+   * Unused method from KeyListener interface.
+   * Required to be implemented but no action is taken on keyTyped events.
+   *
+   * @param e The KeyEvent object.
+   */
   @Override
   public void keyTyped(KeyEvent e) {
     // Nothing to do here
   }
 
+  /**
+   * Handles key release events from the keyboard.
+   * Converts the key character to uppercase and delegates to handleKeyReleased.
+   *
+   * @param e The KeyEvent object.
+   */
   @Override
   public void keyReleased(KeyEvent e) {
     char released = Character.toUpperCase(e.getKeyChar());
     handleKeyReleased(released);
   }
 
+  /**
+   * Handles key press events from the keyboard.
+   * Converts the key character to uppercase and delegates to handleKeyPressed.
+   *
+   * @param e The KeyEvent object.
+   */
   @Override
   public void keyPressed(KeyEvent e) {
     char input = Character.toUpperCase(e.getKeyChar());
     handleKeyPressed(input);
   }
 
+  /**
+   * Main method to launch the TypingGame application.
+   * Uses SwingUtilities.invokeLater to ensure GUI creation on the Event Dispatch
+   * Thread.
+   *
+   * @param args Command line arguments (not used).
+   */
   public static void main(String[] args) {
     // A safe way to put the GUI on the EDT
     SwingUtilities.invokeLater(new Runnable() {
